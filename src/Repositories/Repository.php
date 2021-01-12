@@ -23,4 +23,29 @@ class Repository
     {
         //todo
     }
+
+    public function insert(): EntityInterface
+    {
+        //todo
+    }
+
+    public function update(): EntityInterface
+    {
+        //todo
+    }
+
+    public function delete(): EntityInterface
+    {
+        //todo
+    }
+
+    public function first(): ?EntityInterface
+    {
+        //todo
+    }
+
+    public function all(): EntityInterface
+    {
+        //todo
+    }
 }
