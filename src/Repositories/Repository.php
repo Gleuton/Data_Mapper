@@ -24,27 +24,27 @@ class Repository
         //todo
     }
 
-    public function insert(): EntityInterface
+    public function insert(EntityInterface $entity): EntityInterface
     {
         //todo
     }
 
-    public function update(): EntityInterface
+    public function update(EntityInterface $entity): EntityInterface
     {
         //todo
     }
 
-    public function delete(): EntityInterface
+    public function delete(EntityInterface $entity): EntityInterface
     {
         //todo
     }
 
-    public function first(): ?EntityInterface
+    public function first($id = null): ?EntityInterface
     {
         //todo
     }
 
-    public function all(): EntityInterface
+    public function all(array $condition = []): EntityInterface
     {
         //todo
     }
