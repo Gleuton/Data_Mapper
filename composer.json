@@ -1,0 +1,17 @@
+{
+  "name": "gleuton/app",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gleuton Dutra",
+      "email": "gleuton.dutra@gmail.com"
+    }
+  ],
+  "autoload": {
+      "psr-4": {
+          "Gleuton\\DataMapper\\": "src"
+      }
+  },
+  "require": {}
+}
