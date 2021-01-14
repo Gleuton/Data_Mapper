@@ -13,5 +13,8 @@
           "Gleuton\\DataMapper\\": "src"
       }
   },
-  "require": {}
+  "require": {
+    "ext-pdo": "*"
+  },
+  "description": "design patterns data mapper"
 }
