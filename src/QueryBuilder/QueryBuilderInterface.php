@@ -8,5 +8,5 @@ interface QueryBuilderInterface
 {
     public function getValues(): array;
 
-    public function __toString();
+    public function __toString(): string;
 }
