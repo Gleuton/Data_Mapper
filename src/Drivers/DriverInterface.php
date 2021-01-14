@@ -6,9 +6,9 @@ use Gleuton\DataMapper\QueryBuilder\QueryBuilderInterface;
 
 interface DriverInterface
 {
-    public function connect($config);
+    public function connect(array $config): void;
 
-    public function close();
+    public function close(): void;
 
     public function setQueryBuilder(QueryBuilderInterface $queryBuilder);
 
