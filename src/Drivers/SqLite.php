@@ -24,6 +24,10 @@ class SqLite implements DriverInterface
     public function connect(array $config): void
     {
         $this->conn = new \PDO('sqlite:' . $config['dns']);
+        $this->conn->setAttribute(
+            \PDO::ATTR_ERRMODE,
+            \PDO::ERRMODE_EXCEPTION
+        );
     }
 
     public function close(): void
@@ -49,7 +53,8 @@ class SqLite implements DriverInterface
 
     public function first(): array
     {
-        return $this->statement->fetch(\PDO::FETCH_ASSOC);
+        $result = $this->statement->fetch(\PDO::FETCH_ASSOC);
+        return $result ?: [];
     }
 
 

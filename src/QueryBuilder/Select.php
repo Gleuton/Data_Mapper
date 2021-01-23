@@ -26,6 +26,6 @@ class Select implements QueryBuilderInterface
 
     private function makeSql(string $table): void
     {
-        $this->sql = "SELECT * FROM { $table }";
+        $this->sql = "SELECT * FROM {$table}";
     }
 }
