@@ -53,13 +53,12 @@ class SqLite implements DriverInterface
 
     public function first(): array
     {
-        $result = $this->statement->fetch(\PDO::FETCH_ASSOC);
-        return $result ?: [];
+        return $this->statement->fetch(\PDO::FETCH_ASSOC) ?: [];
     }
 
 
     public function all(): array
     {
-        return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $this->statement->fetchAll(\PDO::FETCH_ASSOC) ?: [];
     }
 }
