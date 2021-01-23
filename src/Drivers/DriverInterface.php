@@ -10,13 +10,13 @@ interface DriverInterface
 
     public function close(): void;
 
-    public function setQueryBuilder(QueryBuilderInterface $queryBuilder);
+    public function setQueryBuilder(QueryBuilderInterface $queryBuilder): void;
 
-    public function execute();
+    public function execute(): bool;
 
-    public function lastInsertedId();
+    public function lastInsertedId(): string;
 
-    public function first();
+    public function first(): array;
 
-    public function all();
+    public function all(): array;
 }
