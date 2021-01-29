@@ -16,8 +16,20 @@ class Repository
         $this->driver = $driver;
     }
 
+    /**
+     * @param string $entity
+     *
+     * @throws \ReflectionException
+     */
     public function setEntity(string $entity): void
     {
+        $reflection = new \ReflectionClass($entity);
+        if (!$reflection->implementsInterface(EntityInterface::class)) {
+            throw new \InvalidArgumentException(
+                "{$entity} not implements interface " .
+                EntityInterface::class
+            );
+        }
         $this->entity = $entity;
     }
 
@@ -55,10 +67,10 @@ class Repository
         $table = (new $this->entity())->getTable();
         $this->driver->setQueryBuilder(new Select($table));
         $this->driver->execute();
-        $data = $this->driver->first();
+        $data     = $this->driver->first();
         $entities = [];
 
-        foreach ($data as $row){
+        foreach ($data as $row) {
             $entities[] = new $this->entity($row);
         }
         return $entities;
