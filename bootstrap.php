@@ -11,7 +11,11 @@ $conn = new SqLite();
 $conn->connect(['dns' => __DIR__ . '/data_base/database.sqlite']);
 
 $repository = new Repository($conn);
-$repository->setEntity(User::class);
-$user = $repository->first();
+try {
+    $repository->setEntity(User::class);
+} catch (ReflectionException $e) {
+    echo $e->getMessage();
+}
+$user = $repository->all();
 
 var_dump($user);

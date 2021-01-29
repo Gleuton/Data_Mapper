@@ -33,9 +33,9 @@ class Repository
         $this->entity = $entity;
     }
 
-    public function getEntity(): EntityInterface
+    public function getEntity(array $data = []): EntityInterface
     {
-        //todo
+        return new $this->entity($data);
     }
 
     public function insert(EntityInterface $entity): EntityInterface
@@ -59,19 +59,19 @@ class Repository
         $this->driver->execute();
 
         $data = $this->driver->first();
-        return new $this->entity($data);
+        return $this->getEntity($data);
     }
 
     public function all(array $condition = []): array
     {
-        $table = (new $this->entity())->getTable();
+        $table = $this->getEntity()->getTable();
         $this->driver->setQueryBuilder(new Select($table));
         $this->driver->execute();
-        $data     = $this->driver->first();
+        $data     = $this->driver->all();
         $entities = [];
 
         foreach ($data as $row) {
-            $entities[] = new $this->entity($row);
+            $entities[] = $this->getEntity($row);
         }
         return $entities;
     }
