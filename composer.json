@@ -10,7 +10,8 @@
   ],
   "autoload": {
       "psr-4": {
-          "Gleuton\\DataMapper\\": "src"
+          "Gleuton\\DataMapper\\": "src",
+          "App\\": "app"
       }
   },
   "require": {

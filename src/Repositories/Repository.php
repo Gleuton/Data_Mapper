@@ -4,19 +4,21 @@ namespace Gleuton\DataMapper\Repositories;
 
 use Gleuton\DataMapper\Drivers\DriverInterface;
 use Gleuton\DataMapper\Entities\EntityInterface;
+use Gleuton\DataMapper\QueryBuilder\Select;
 
 class Repository
 {
     protected DriverInterface $driver;
+    protected string $entity;
 
     public function __construct(DriverInterface $driver)
     {
         $this->driver = $driver;
     }
 
-    public function setEntity(string $entity)
+    public function setEntity(string $entity): void
     {
-        //todo
+        $this->entity = $entity;
     }
 
     public function getEntity(): EntityInterface
@@ -41,11 +43,24 @@ class Repository
 
     public function first($id = null): ?EntityInterface
     {
-        //todo
+        $this->driver->setQueryBuilder(new Select('tb_user'));
+        $this->driver->execute();
+
+        $data = $this->driver->first();
+        return new $this->entity($data);
     }
 
-    public function all(array $condition = []): EntityInterface
+    public function all(array $condition = []): array
     {
-        //todo
+        $table = (new $this->entity())->getTable();
+        $this->driver->setQueryBuilder(new Select($table));
+        $this->driver->execute();
+        $data = $this->driver->first();
+        $entities = [];
+
+        foreach ($data as $row){
+            $entities[] = new $this->entity($row);
+        }
+        return $entities;
     }
 }
