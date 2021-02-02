@@ -16,6 +16,12 @@ try {
 } catch (ReflectionException $e) {
     echo $e->getMessage();
 }
-$user = $repository->first(2);
+$user_entity = new User(
+    [
+        'nome' => 'Jão Test'
+    ]
+);
+
+$user = $repository->insert($user_entity);
 
 var_dump($user);

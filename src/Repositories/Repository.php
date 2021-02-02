@@ -4,6 +4,7 @@ namespace Gleuton\DataMapper\Repositories;
 
 use Gleuton\DataMapper\Drivers\DriverInterface;
 use Gleuton\DataMapper\Entities\EntityInterface;
+use Gleuton\DataMapper\QueryBuilder\Insert;
 use Gleuton\DataMapper\QueryBuilder\Select;
 
 class Repository
@@ -40,7 +41,12 @@ class Repository
 
     public function insert(EntityInterface $entity): EntityInterface
     {
-        //todo
+        $table = $entity->getTable();
+        $this->driver->setQueryBuilder(
+            new Insert($table, $entity->getAll())
+        );
+        $this->driver->execute();
+        return $this->first($this->driver->lastInsertedId());
     }
 
     public function update(EntityInterface $entity): EntityInterface
