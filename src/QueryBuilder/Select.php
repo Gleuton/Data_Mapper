@@ -4,14 +4,19 @@
 namespace Gleuton\DataMapper\QueryBuilder;
 
 
+use Gleuton\DataMapper\QueryBuilder\Filters\where;
+
 class Select implements QueryBuilderInterface
 {
+    use where;
+
     private string $sql;
-    private array $values;
+    protected array $values = [];
+    private array $conditions;
 
     public function __construct(string $table, array $conditions = [])
     {
-        $this->makeSql($table);
+        $this->makeSql($table, $conditions);
     }
 
     public function getValues(): array
@@ -24,8 +29,9 @@ class Select implements QueryBuilderInterface
         return $this->sql;
     }
 
-    private function makeSql(string $table): void
+    private function makeSql(string $table, array $conditions): void
     {
-        $this->sql = "SELECT * FROM {$table}";
+        $this->sql = "SELECT * FROM {$table} " .
+                    $this->makeWhere($conditions);
     }
 }

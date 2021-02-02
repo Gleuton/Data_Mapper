@@ -55,7 +55,12 @@ class Repository
 
     public function first($id = null): ?EntityInterface
     {
-        $this->driver->setQueryBuilder(new Select('tb_user'));
+        $table = $this->getEntity()->getTable();
+        $pk = $this->getEntity()->getPrimaryKey();
+
+        $conditions = !is_null($id) ? [[$pk, $id]] : [];
+
+        $this->driver->setQueryBuilder(new Select($table, $conditions));
         $this->driver->execute();
 
         $data = $this->driver->first();
@@ -65,7 +70,7 @@ class Repository
     public function all(array $condition = []): array
     {
         $table = $this->getEntity()->getTable();
-        $this->driver->setQueryBuilder(new Select($table));
+        $this->driver->setQueryBuilder(new Select($table, $condition));
         $this->driver->execute();
         $data     = $this->driver->all();
         $entities = [];

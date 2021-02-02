@@ -16,6 +16,6 @@ try {
 } catch (ReflectionException $e) {
     echo $e->getMessage();
 }
-$user = $repository->all();
+$user = $repository->first(2);
 
 var_dump($user);

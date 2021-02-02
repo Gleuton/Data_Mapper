@@ -13,4 +13,6 @@ interface EntityInterface
     public function getAll(): array;
 
     public function getTable(): string;
+
+    public function getPrimaryKey(): string;
 }

@@ -8,6 +8,7 @@ abstract class Entity implements EntityInterface
 {
     protected array $data;
     protected string $table;
+    protected string $primary_key = 'id';
 
     public function __construct(array $data = [])
     {
@@ -27,5 +28,9 @@ abstract class Entity implements EntityInterface
     public function getTable(): string
     {
         return $this->table;
+    }
+    public function getPrimaryKey(): string
+    {
+        return $this->primary_key;
     }
 }

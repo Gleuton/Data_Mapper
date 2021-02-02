@@ -43,7 +43,9 @@ class SqLite implements DriverInterface
     public function execute(): bool
     {
         $this->statement = $this->conn->prepare($this->query);
-        return $this->statement->execute();
+        return $this->statement->execute(
+            $this->query->getValues()
+        );
     }
 
     public function lastInsertedId(): string
