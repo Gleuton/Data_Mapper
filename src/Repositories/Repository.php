@@ -4,6 +4,7 @@ namespace Gleuton\DataMapper\Repositories;
 
 use Gleuton\DataMapper\Drivers\DriverInterface;
 use Gleuton\DataMapper\Entities\EntityInterface;
+use Gleuton\DataMapper\QueryBuilder\Delete;
 use Gleuton\DataMapper\QueryBuilder\Insert;
 use Gleuton\DataMapper\QueryBuilder\Select;
 
@@ -56,13 +57,25 @@ class Repository
 
     public function delete(EntityInterface $entity): EntityInterface
     {
-        //todo
+
+        $table = $entity->getTable();
+        $id    = $entity->getPrimaryKey();
+
+        $condition = [
+            [$id, $entity->getAll()[$id]]
+        ];
+
+        $this->driver->setQueryBuilder(
+            new Delete($table, $condition)
+        );
+        $this->driver->execute();
+        return $this->first($this->driver->lastInsertedId());
     }
 
     public function first($id = null): ?EntityInterface
     {
         $table = $this->getEntity()->getTable();
-        $pk = $this->getEntity()->getPrimaryKey();
+        $pk    = $this->getEntity()->getPrimaryKey();
 
         $conditions = !is_null($id) ? [[$pk, $id]] : [];
 
