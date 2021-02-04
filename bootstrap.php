@@ -18,6 +18,9 @@ try {
 }
 
 $user = $repository->first();
-$repository->delete($user);
+$user->nome = 'Gleuton Dutra';
 
-var_dump($user);
+$user_del = $repository->update($user);
+
+
+var_dump($user_del);

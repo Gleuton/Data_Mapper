@@ -15,8 +15,8 @@ class Insert implements QueryBuilderInterface
      */
     public function __construct(string $table, array $data)
     {
-        $this->makeSql($table, $data);
         $this->values = array_values($data);
+        $this->makeSql($table, $data);
     }
 
     /**
