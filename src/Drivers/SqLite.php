@@ -5,28 +5,30 @@ namespace Gleuton\DataMapper\Drivers;
 
 
 use Gleuton\DataMapper\QueryBuilder\QueryBuilderInterface;
+use PDO;
+use PDOStatement;
 
 class SqLite implements DriverInterface
 {
     /**
-     * @var \PDO|null
+     * @var PDO|null
      */
-    private ?\PDO $conn;
+    private ?PDO $conn;
     /**
      * @var QueryBuilderInterface
      */
     private QueryBuilderInterface $query;
     /**
-     * @var false|\PDOStatement
+     * @var false|PDOStatement
      */
     private $statement;
 
     public function connect(array $config): void
     {
-        $this->conn = new \PDO('sqlite:' . $config['dns']);
+        $this->conn = new PDO('sqlite:' . $config['dns']);
         $this->conn->setAttribute(
-            \PDO::ATTR_ERRMODE,
-            \PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION
         );
     }
 
@@ -55,12 +57,12 @@ class SqLite implements DriverInterface
 
     public function first(): array
     {
-        return $this->statement->fetch(\PDO::FETCH_ASSOC) ?: [];
+        return $this->statement->fetch(PDO::FETCH_ASSOC) ?: [];
     }
 
 
     public function all(): array
     {
-        return $this->statement->fetchAll(\PDO::FETCH_ASSOC) ?: [];
+        return $this->statement->fetchAll(PDO::FETCH_ASSOC) ?: [];
     }
 }
